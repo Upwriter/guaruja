@@ -137,7 +137,7 @@ dois, faltando só as configurações abaixo.
 ### Google AdSense
 
 1. Crie uma conta em [google.com/adsense](https://www.google.com/adsense) para o domínio
-   `destinoguaruja.com.br` e espere a aprovação.
+   `destinosguaruja.com.br` e espere a aprovação.
 2. No painel do AdSense, copie o seu ID de cliente (algo como `ca-pub-1234567890123456`).
 3. Abra `public/ads.txt` e cole a linha exata que o AdSense pedir (removendo o `#` do início).
 4. Na Vercel, vá em **Settings → Environment Variables** do projeto e adicione:
@@ -183,7 +183,7 @@ git push -u origin main
 3. Antes de clicar em "Deploy", adicione as variáveis de ambiente que você já tiver
    (`PUBLIC_ADSENSE_CLIENT_ID` e/ou `PUBLIC_GA_ID`), se for o caso. Pode adicionar depois também.
 4. Clique em "Deploy" e aguarde. Ao final, a Vercel te dá um endereço `.vercel.app` para conferir.
-5. Para usar o domínio `destinoguaruja.com.br`: em **Settings → Domains**, adicione o domínio e
+5. Para usar o domínio `destinosguaruja.com.br`: em **Settings → Domains**, adicione o domínio e
    siga as instruções da Vercel para apontar o DNS (ela mostra exatamente quais registros
    configurar no seu provedor de domínio).
 

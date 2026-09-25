@@ -8,7 +8,7 @@ import { rehypeAdSlots } from './src/lib/rehype-ad-slots.ts';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://destinoguaruja.com.br',
+  site: 'https://destinosguaruja.com.br',
   output: 'static',
   trailingSlash: 'always',
   integrations: [
