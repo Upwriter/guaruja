@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  /* Azul-mar */
+  --color-sea-50: #f0f9fc;
+  --color-sea-100: #dbf0f7;
+  --color-sea-200: #b8e2ef;
+  --color-sea-300: #86cce0;
+  --color-sea-400: #4fadc9;
+  --color-sea-500: #2f8fae;
+  --color-sea-600: #23708c;
+  --color-sea-700: #1f5a70;
+  --color-sea-800: #1e4a5c;
+  --color-sea-900: #1c3e4d;
+
+  /* Areia */
+  --color-sand-50: #fdfbf5;
+  --color-sand-100: #f9f2e2;
+  --color-sand-200: #f2e3c0;
+  --color-sand-300: #e8cd94;
+  --color-sand-400: #dcb066;
+  --color-sand-500: #cf9748;
+  --color-sand-600: #b57d38;
+  --color-sand-700: #93632f;
+  --color-sand-800: #78502c;
+  --color-sand-900: #644327;
+
+  --font-sans-fallback: ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans, var(--font-sans-fallback));
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-sea-500);
+    outline-offset: 2px;
+  }
+}
+
+@utility prose-article {
+  --tw-prose-body: var(--color-sea-900);
+  --tw-prose-headings: var(--color-sea-900);
+  --tw-prose-links: var(--color-sea-700);
+  --tw-prose-bold: var(--color-sea-900);
+  --tw-prose-bullets: var(--color-sea-400);
+  --tw-prose-quotes: var(--color-sea-800);
+  --tw-prose-quote-borders: var(--color-sea-300);
+  max-width: 75ch;
+}

@@ -1,0 +1,9 @@
+# Este arquivo é exigido pelo Google AdSense para confirmar que você tem
+# autorização para exibir anúncios neste domínio.
+#
+# Depois de criar sua conta no Google AdSense, copie a linha "ads.txt" exata
+# que aparece no seu painel (Sites > destinoguaruja.com.br > "Ver instruções
+# do ads.txt") e cole abaixo, removendo o "#" do início.
+#
+# Formato (exemplo, NÃO use este valor — copie o seu real do painel do AdSense):
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,18 @@
+---
+interface Props {
+  date: Date;
+}
+
+const { date } = Astro.props;
+// timeZone: 'UTC' evita que a data "ande" um dia para trás ou para frente
+// dependendo do fuso horário de quem está rodando o build (o frontmatter
+// pubDate não tem horário, só data).
+const formatted = new Intl.DateTimeFormat('pt-BR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(date);
+---
+
+<time datetime={date.toISOString()}>{formatted}</time>

@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import FormattedDate from './FormattedDate.astro';
+import { getArticleUrl, type Article } from '../lib/articles';
+import { getCategory as getCategoryInfo } from '../consts';
+
+interface Props {
+  article: Article;
+  /** Mostrar o rótulo da categoria no card (desligue dentro de páginas da própria categoria). */
+  showCategory?: boolean;
+}
+
+const { article, showCategory = true } = Astro.props;
+const category = getCategoryInfo(article.data.category);
+const href = getArticleUrl(article);
+---
+
+<article class="flex flex-col overflow-hidden rounded-xl border border-sea-100 bg-white shadow-sm transition hover:shadow-md">
+  <a href={href} class="block">
+    {
+      article.data.heroImage ? (
+        <Image
+          src={article.data.heroImage}
+          alt={article.data.heroAlt ?? ''}
+          width={480}
+          height={270}
+          class="h-44 w-full object-cover"
+        />
+      ) : (
+        <div class="flex h-44 w-full items-center justify-center bg-sea-100 text-sea-400">
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-10 w-10" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 16.5 8 11l3 3 5-6 5 6" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="17" cy="7" r="1.5" />
+          </svg>
+        </div>
+      )
+    }
+  </a>
+  <div class="flex flex-1 flex-col gap-2 p-4">
+    {
+      showCategory && category && (
+        <a
+          href={`/${category.slug}/`}
+          class="w-fit rounded-full bg-sand-100 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-sand-700 hover:bg-sand-200"
+        >
+          {category.label}
+        </a>
+      )
+    }
+    <h3 class="text-lg font-bold leading-snug text-sea-900">
+      <a href={href} class="hover:underline">
+        {article.data.title}
+      </a>
+    </h3>
+    <p class="line-clamp-2 flex-1 text-sm text-sea-700">{article.data.description}</p>
+    <p class="text-xs text-sea-500">
+      <FormattedDate date={article.data.pubDate} />
+    </p>
+  </div>
+</article>

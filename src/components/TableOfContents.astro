@@ -1,0 +1,27 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const items = headings.filter((h) => h.depth === 2);
+---
+
+{
+  items.length > 1 && (
+    <nav aria-label="Sumário do artigo" class="not-prose my-6 rounded-lg border border-sea-100 bg-sea-50 p-4">
+      <p class="mb-2 text-sm font-semibold text-sea-900">Neste artigo</p>
+      <ol class="list-decimal space-y-1 pl-5 text-sm text-sea-700">
+        {items.map((heading) => (
+          <li>
+            <a href={`#${heading.slug}`} class="hover:text-sea-900 hover:underline">
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

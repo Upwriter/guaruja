@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Busca';
+const description = 'Busque artigos sobre praias, passeios, hospedagem e tudo sobre o Guarujá.';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-extrabold text-sea-900">Buscar no site</h1>
+    <p class="mt-2 text-sea-700">Digite um termo para encontrar artigos sobre o Guarujá.</p>
+
+    <div id="search" class="mt-8"></div>
+
+    <p class="mt-6 text-sm text-sea-500">
+      A busca funciona a partir do conteúdo publicado no site (gerada com Pagefind). Ela só fica
+      disponível depois de um build de produção — em <code>npm run dev</code> este campo pode não
+      retornar resultados.
+    </p>
+  </div>
+
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <script src="/pagefind/pagefind-ui.js" is:inline></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof PagefindUI === 'undefined') return;
+      new PagefindUI({ element: '#search', showSubResults: true, showImages: false });
+    });
+  </script>
+</BaseLayout>

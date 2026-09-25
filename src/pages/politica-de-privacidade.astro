@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, SITE_URL } from '../consts';
+
+const title = 'Política de Privacidade';
+const description = `Como o ${SITE_TITLE} coleta, usa e protege seus dados pessoais, em conformidade com a LGPD.`;
+const lastUpdated = '[REVISAR: preencha a data em que esta política entrou em vigor]';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-extrabold text-sea-900">Política de Privacidade</h1>
+    <p class="mt-2 text-sm text-sea-500">Última atualização: {lastUpdated}</p>
+
+    <div class="prose prose-article mt-6 max-w-none">
+      <p>
+        Esta Política de Privacidade descreve como o site {SITE_TITLE} ({SITE_URL}) coleta, usa,
+        armazena e protege dados pessoais dos seus visitantes, em conformidade com a Lei Geral de
+        Proteção de Dados (Lei nº 13.709/2018 — LGPD).
+      </p>
+
+      <h2>1. Quem é o controlador dos dados</h2>
+      <p>
+        [REVISAR] Informe aqui o nome (pessoa física ou jurídica) responsável pelo site, e se
+        houver, CNPJ e endereço. Exemplo: "O {SITE_TITLE} é operado por [REVISAR: nome/razão
+        social], [REVISAR: CNPJ, se houver]."
+      </p>
+
+      <h2>2. Quais dados coletamos</h2>
+      <ul>
+        <li>
+          <strong>Dados de navegação:</strong> páginas visitadas, tempo de permanência, tipo de
+          dispositivo e navegador, coletados de forma agregada e anônima através do Google
+          Analytics, quando você consente com o uso de cookies de análise.
+        </li>
+        <li>
+          <strong>Cookies de publicidade:</strong> quando você consente, o Google AdSense pode usar
+          cookies para exibir anúncios relevantes. Veja a seção 5 sobre cookies.
+        </li>
+        <li>
+          <strong>Dados de contato:</strong> se você nos envia uma mensagem pela página de{' '}
+          <a href="/contato/">Contato</a> ou por e-mail, coletamos as informações que você
+          voluntariamente fornecer (como nome e e-mail), usadas apenas para responder ao seu
+          contato.
+        </li>
+      </ul>
+
+      <h2>3. Finalidade do tratamento</h2>
+      <p>
+        Usamos os dados coletados para: (i) entender como o site é utilizado e melhorar seu
+        conteúdo; (ii) exibir anúncios; (iii) responder a mensagens de contato; e (iv) cumprir
+        obrigações legais, quando aplicável.
+      </p>
+
+      <h2>4. Compartilhamento de dados com terceiros</h2>
+      <p>
+        Podemos compartilhar dados de navegação com os seguintes parceiros, que atuam como
+        operadores de dados:
+      </p>
+      <ul>
+        <li>Google Analytics (métricas de audiência);</li>
+        <li>Google AdSense (exibição de anúncios);</li>
+        <li>
+          Programas de afiliados (como Booking.com), quando você clica em um link de afiliado — o
+          parceiro pode registrar que você veio a partir deste site.
+        </li>
+      </ul>
+      <p>
+        Não vendemos dados pessoais a terceiros. [REVISAR: liste aqui outros serviços de terceiros
+        que você venha a usar no futuro.]
+      </p>
+
+      <h2>5. Cookies</h2>
+      <p>
+        Cookies são pequenos arquivos armazenados no seu navegador. Usamos um banner de
+        consentimento: cookies de análise (Google Analytics) e de publicidade (Google AdSense) só
+        são ativados depois que você clica em "Aceitar". Você pode recusar a qualquer momento pelo
+        próprio banner, ou apagar os cookies já salvos nas configurações do seu navegador.
+      </p>
+
+      <h2>6. Seus direitos como titular de dados (LGPD)</h2>
+      <p>De acordo com o artigo 18 da LGPD, você tem direito a:</p>
+      <ul>
+        <li>Confirmar a existência de tratamento dos seus dados;</li>
+        <li>Acessar, corrigir ou solicitar a exclusão dos seus dados;</li>
+        <li>Solicitar a portabilidade dos dados a outro fornecedor;</li>
+        <li>Revogar o consentimento dado anteriormente;</li>
+        <li>Obter informações sobre com quem compartilhamos seus dados.</li>
+      </ul>
+      <p>
+        Para exercer esses direitos, entre em contato pelo e-mail informado na página de{' '}
+        <a href="/contato/">Contato</a>.
+      </p>
+
+      <h2>7. Segurança</h2>
+      <p>
+        Adotamos medidas técnicas razoáveis para proteger os dados coletados. Este site é
+        hospedado na Vercel e não armazena dados de pagamento ou senhas.
+      </p>
+
+      <h2>8. Alterações nesta política</h2>
+      <p>
+        Esta política pode ser atualizada periodicamente. A data da última atualização está
+        indicada no topo desta página.
+      </p>
+
+      <h2>9. Contato</h2>
+      <p>
+        Dúvidas sobre esta política? Fale com a gente pela página de{' '}
+        <a href="/contato/">Contato</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

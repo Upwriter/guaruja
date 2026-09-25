@@ -1,0 +1,127 @@
+---
+import '../styles/global.css';
+import { Font } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { DEFAULT_OG_IMAGE, SITE_TITLE } from '../consts';
+
+interface Props {
+  /** Título da página (sem o nome do site). Na home, use o título completo. */
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  /** Dados estruturados (JSON-LD) extras desta página. */
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  image = DEFAULT_OG_IMAGE,
+  type = 'website',
+  structuredData,
+} = Astro.props;
+
+const isHome = Astro.url.pathname === '/';
+const pageTitle = isHome ? title : `${title} | ${SITE_TITLE}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(image, Astro.site);
+
+const gaId = import.meta.env.PUBLIC_GA_ID;
+const adsenseClientId = import.meta.env.PUBLIC_ADSENSE_CLIENT_ID;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href="/rss.xml" />
+    <meta name="generator" content={Astro.generator} />
+
+    <Font cssVariable="--font-sans" preload />
+
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={SITE_TITLE} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {structuredData && <JsonLd data={structuredData} />}
+
+    <!--
+      Google Analytics 4 (opcional).
+      Só é carregado depois que o visitante aceita cookies no banner de consentimento
+      e apenas se PUBLIC_GA_ID estiver configurado nas variáveis de ambiente.
+    -->
+    {
+      gaId && (
+        <script
+          type="text/plain"
+          data-consent="analytics"
+          data-src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+          async
+        />
+      )
+    }
+    {
+      gaId && (
+        <script type="text/plain" data-consent="analytics" set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${gaId}');
+        `} />
+      )
+    }
+
+    <!--
+      Google AdSense (opcional). Mesma lógica: só carrega com PUBLIC_ADSENSE_CLIENT_ID
+      configurado e depois do aceite de cookies. Os anúncios em si ficam nos
+      componentes <AdSlot />, espalhados pelas páginas.
+    -->
+    {
+      adsenseClientId && (
+        <script
+          type="text/plain"
+          data-consent="ads"
+          data-src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
+          crossorigin="anonymous"
+        />
+      )
+    }
+  </head>
+  <body class="flex min-h-screen flex-col bg-white text-sea-900">
+    <a
+      href="#conteudo"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-sea-700 focus:px-4 focus:py-2 focus:text-white"
+    >
+      Pular para o conteúdo
+    </a>
+    <Header />
+    <main id="conteudo" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <CookieConsent />
+  </body>
+</html>

@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CATEGORIES } from '../consts';
+---
+
+<BaseLayout title="Página não encontrada" description="Esta página não existe ou foi movida.">
+  <div class="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-wide text-sea-500">Erro 404</p>
+    <h1 class="mt-2 text-3xl font-extrabold text-sea-900 sm:text-4xl">
+      Ops, essa página não foi encontrada
+    </h1>
+    <p class="mt-4 text-sea-700">
+      O link pode estar quebrado ou a página pode ter sido movida. Que tal explorar outra parte do
+      site?
+    </p>
+
+    <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <a href="/" class="rounded-md bg-sea-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-sea-800">
+        Voltar para a página inicial
+      </a>
+      <a
+        href="/busca/"
+        class="rounded-md border border-sea-300 px-5 py-2.5 text-sm font-medium text-sea-700 hover:bg-sea-50"
+      >
+        Buscar no site
+      </a>
+    </div>
+
+    <div class="mt-12 text-left">
+      <p class="text-sm font-semibold text-sea-900">Ou navegue por categoria:</p>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {
+          CATEGORIES.map((cat) => (
+            <li>
+              <a
+                href={`/${cat.slug}/`}
+                class="inline-block rounded-full border border-sea-200 px-3 py-1.5 text-sm text-sea-700 hover:bg-sea-50"
+              >
+                {cat.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

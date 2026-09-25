@@ -1,0 +1,110 @@
+---
+// Banner de consentimento de cookies (LGPD).
+// Enquanto o visitante não aceitar, nenhum script de anúncios ou analytics roda:
+// eles ficam marcados como type="text/plain" (ver BaseLayout e AdSlot) e só são
+// "ativados" (trocados para type=text/javascript) depois do aceite, aqui neste script.
+---
+
+<div
+  id="cookie-consent"
+  class="fixed inset-x-0 bottom-0 z-50 hidden border-t border-sea-200 bg-white/95 p-4 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur sm:p-6"
+  role="dialog"
+  aria-live="polite"
+  aria-label="Consentimento de cookies"
+>
+  <div class="mx-auto flex max-w-4xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-sm text-sea-800">
+      Usamos cookies para medir audiência e exibir anúncios. Você pode aceitar ou recusar — isso
+      não afeta a navegação no conteúdo do site. Veja nossa{' '}
+      <a href="/politica-de-privacidade/" class="underline underline-offset-2">
+        Política de Privacidade
+      </a>.
+    </p>
+    <div class="flex shrink-0 gap-2">
+      <button
+        type="button"
+        id="cookie-reject"
+        class="rounded-md border border-sea-300 px-4 py-2 text-sm font-medium text-sea-700 hover:bg-sea-50"
+      >
+        Recusar
+      </button>
+      <button
+        type="button"
+        id="cookie-accept"
+        class="rounded-md bg-sea-700 px-4 py-2 text-sm font-medium text-white hover:bg-sea-800"
+      >
+        Aceitar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'dg-cookie-consent';
+
+  function activateGatedScripts() {
+    const gated = document.querySelectorAll<HTMLScriptElement>('script[type="text/plain"][data-consent]');
+    gated.forEach((oldScript) => {
+      const newScript = document.createElement('script');
+      for (const attr of Array.from(oldScript.attributes)) {
+        if (attr.name === 'type') continue;
+        if (attr.name === 'data-src') {
+          newScript.src = attr.value;
+          continue;
+        }
+        newScript.setAttribute(attr.name, attr.value);
+      }
+      newScript.type = 'text/javascript';
+      if (!newScript.src) {
+        newScript.textContent = oldScript.textContent;
+      }
+      oldScript.replaceWith(newScript);
+    });
+  }
+
+  function getConsent(): 'accepted' | 'rejected' | null {
+    try {
+      const value = localStorage.getItem(STORAGE_KEY);
+      return value === 'accepted' || value === 'rejected' ? value : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function setConsent(value: 'accepted' | 'rejected') {
+    try {
+      localStorage.setItem(STORAGE_KEY, value);
+    } catch {
+      // localStorage indisponível (modo privado, etc.) — o banner volta a aparecer na próxima visita.
+    }
+  }
+
+  function init() {
+    const banner = document.getElementById('cookie-consent');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const rejectBtn = document.getElementById('cookie-reject');
+    if (!banner || !acceptBtn || !rejectBtn) return;
+
+    const consent = getConsent();
+    if (consent === 'accepted') {
+      activateGatedScripts();
+    } else if (consent === null) {
+      banner.classList.remove('hidden');
+    }
+
+    acceptBtn.addEventListener('click', () => {
+      setConsent('accepted');
+      activateGatedScripts();
+      banner.classList.add('hidden');
+    });
+
+    rejectBtn.addEventListener('click', () => {
+      setConsent('rejected');
+      banner.classList.add('hidden');
+    });
+  }
+
+  // Este script é um módulo (type="module"), então já roda depois que o HTML
+  // acima foi interpretado — não precisa esperar nenhum evento de carregamento.
+  init();
+</script>

@@ -1,0 +1,60 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { ARTICLES_PER_PAGE, CATEGORIES, getCategory } from '../../consts';
+import { getPublishedArticles, type Article } from '../../lib/articles';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allArticles = await getPublishedArticles();
+  return CATEGORIES.flatMap((cat) => {
+    const articles = allArticles.filter((a) => a.data.category === cat.slug);
+    return paginate(articles, {
+      params: { category: cat.slug },
+      pageSize: ARTICLES_PER_PAGE,
+    });
+  });
+}) satisfies GetStaticPaths;
+
+const { category } = Astro.params;
+const { page } = Astro.props as { page: Page<Article> };
+const categoryInfo = getCategory(category!)!;
+
+const baseUrl = `/${categoryInfo.slug}/`;
+const pageTitle =
+  page.currentPage > 1 ? `${categoryInfo.label} — página ${page.currentPage}` : categoryInfo.label;
+const description =
+  page.currentPage > 1
+    ? `Mais artigos sobre ${categoryInfo.label.toLowerCase()} no Guarujá (página ${page.currentPage}).`
+    : `${categoryInfo.description} Guia completo sobre ${categoryInfo.label.toLowerCase()} no Guarujá, SP.`;
+
+const breadcrumbItems = [
+  { name: 'Início', url: '/' },
+  { name: categoryInfo.label, url: baseUrl },
+];
+---
+
+<BaseLayout title={pageTitle} description={description} structuredData={breadcrumbJsonLd(breadcrumbItems)}>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <Breadcrumb items={breadcrumbItems} />
+    <h1 class="text-3xl font-extrabold text-sea-900 sm:text-4xl">{categoryInfo.label}</h1>
+    <p class="mt-2 max-w-2xl text-sea-700">{categoryInfo.description}</p>
+
+    {
+      page.data.length > 0 ? (
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {page.data.map((article) => (
+            <ArticleCard article={article} showCategory={false} />
+          ))}
+        </div>
+      ) : (
+        <p class="mt-8 text-sea-600">Ainda não há artigos publicados nesta categoria.</p>
+      )
+    }
+
+    <Pagination currentPage={page.currentPage} lastPage={page.lastPage} baseUrl={baseUrl} />
+  </div>
+</BaseLayout>

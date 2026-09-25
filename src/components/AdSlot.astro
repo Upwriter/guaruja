@@ -1,0 +1,34 @@
+---
+// Só aparece alguma coisa aqui quando PUBLIC_ADSENSE_CLIENT_ID estiver configurado
+// (veja .env.example e o README). Até lá, o componente não renderiza nada.
+// O <ins> reserva uma altura mínima para evitar que o layout "pule" (CLS) quando
+// o anúncio carregar de verdade.
+interface Props {
+  /** Identificador da posição, só para leitura humana no código-fonte. */
+  position: 'apos-primeiro-paragrafo' | 'meio-do-artigo' | 'final-do-artigo';
+  /** ID do bloco de anúncio no AdSense (data-ad-slot). Opcional em modo "auto ads". */
+  slot?: string;
+}
+
+const { position, slot } = Astro.props;
+const clientId = import.meta.env.PUBLIC_ADSENSE_CLIENT_ID;
+---
+
+{
+  clientId && (
+    <div
+      class="my-6 flex min-h-[100px] w-full items-center justify-center overflow-hidden"
+      data-ad-position={position}
+    >
+      <ins
+        class="adsbygoogle"
+        style="display:block; width:100%"
+        data-ad-client={clientId}
+        data-ad-slot={slot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+      <script type="text/plain" data-consent="ads" set:html={'(adsbygoogle = window.adsbygoogle || []).push({});'} />
+    </div>
+  )
+}

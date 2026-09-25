@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../consts';
+
+const title = 'Contato';
+const description = `Fale com a equipe do ${SITE_TITLE}: sugestões, correções e parcerias.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-extrabold text-sea-900">Contato</h1>
+
+    <div class="prose prose-article mt-6 max-w-none">
+      <p>
+        Encontrou uma informação desatualizada, quer sugerir um lugar para visitarmos ou tem uma
+        proposta de parceria? Fale com a gente:
+      </p>
+      <p>
+        E-mail: <a href="mailto:[REVISAR]@destinoguaruja.com.br">[REVISAR]@destinoguaruja.com.br</a>
+      </p>
+      <p>
+        [REVISAR] Se preferir, adicione aqui outros canais de contato (Instagram, WhatsApp
+        Business, formulário) e o tempo médio de resposta.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  currentPage: number;
+  lastPage: number;
+  /** URL base sem número de página, ex.: "/praias/" */
+  baseUrl: string;
+}
+
+const { currentPage, lastPage, baseUrl } = Astro.props;
+
+function pageUrl(page: number): string {
+  return page <= 1 ? baseUrl : `${baseUrl}${page}/`;
+}
+---
+
+{
+  lastPage > 1 && (
+    <nav aria-label="Paginação" class="mx-auto flex max-w-6xl items-center justify-center gap-2 px-4 py-8">
+      {currentPage > 1 && (
+        <a
+          href={pageUrl(currentPage - 1)}
+          class="rounded-md border border-sea-300 px-3 py-2 text-sm font-medium text-sea-700 hover:bg-sea-50"
+        >
+          Anterior
+        </a>
+      )}
+      <span class="text-sm text-sea-600">
+        Página {currentPage} de {lastPage}
+      </span>
+      {currentPage < lastPage && (
+        <a
+          href={pageUrl(currentPage + 1)}
+          class="rounded-md border border-sea-300 px-3 py-2 text-sm font-medium text-sea-700 hover:bg-sea-50"
+        >
+          Próxima
+        </a>
+      )}
+    </nav>
+  )
+}

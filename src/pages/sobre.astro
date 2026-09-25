@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../consts';
+
+const title = 'Sobre';
+const description = `Conheça o ${SITE_TITLE}, um guia independente de turismo sobre o Guarujá, no litoral de São Paulo.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-extrabold text-sea-900">Sobre o {SITE_TITLE}</h1>
+
+    <div class="prose prose-article mt-6 max-w-none">
+      <p>
+        O {SITE_TITLE} é um guia independente de turismo dedicado ao Guarujá, no litoral de São
+        Paulo. Aqui você encontra guias de praias, sugestões de passeios, dicas de hospedagem e
+        gastronomia, e informações práticas para planejar sua viagem, seja um fim de semana ou
+        férias mais longas.
+      </p>
+      <p>[REVISAR] Conte aqui, em poucas linhas, quem escreve o site e por quê: sua relação com o
+        Guarujá, sua experiência com a cidade, ou o motivo de ter criado este projeto. Esse
+        parágrafo ajuda os leitores (e o Google) a confiarem no conteúdo.</p>
+      <h2>Como escolhemos o que recomendar</h2>
+      <p>
+        [REVISAR] Explique brevemente seus critérios: por exemplo, se você visita os lugares
+        pessoalmente, se usa fontes oficiais (prefeitura, órgãos de turismo) ou se aceita sugestões
+        de leitores.
+      </p>
+      <h2>Publicidade e links de afiliados</h2>
+      <p>
+        Este site pode exibir anúncios (Google AdSense) e usar links de afiliados (por exemplo, da
+        Booking.com). Quando você clica em um link de afiliado e faz uma reserva, podemos receber
+        uma pequena comissão, sem custo extra para você. Isso nos ajuda a manter o site no ar.
+        Anúncios e links patrocinados são sempre identificados como tal.
+      </p>
+      <h2>Fale com a gente</h2>
+      <p>
+        Encontrou uma informação desatualizada ou quer sugerir um lugar? Visite nossa página de{' '}
+        <a href="/contato/">Contato</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

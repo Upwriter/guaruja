@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, SITE_URL } from '../consts';
+
+const title = 'Termos de Uso';
+const description = `Condições de uso do site ${SITE_TITLE}.`;
+const lastUpdated = '[REVISAR: preencha a data em que estes termos entraram em vigor]';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-extrabold text-sea-900">Termos de Uso</h1>
+    <p class="mt-2 text-sm text-sea-500">Última atualização: {lastUpdated}</p>
+
+    <div class="prose prose-article mt-6 max-w-none">
+      <p>
+        Ao acessar e utilizar o site {SITE_TITLE} ({SITE_URL}), você concorda com os termos
+        descritos abaixo. Se não concordar, recomendamos que não utilize o site.
+      </p>
+
+      <h2>1. Natureza do conteúdo</h2>
+      <p>
+        O conteúdo deste site tem finalidade informativa e turística. Fazemos o possível para
+        manter preços, horários, endereços e demais informações atualizados, mas eles podem mudar
+        sem aviso prévio. <strong>Sempre confirme informações importantes</strong> — como preços de
+        passagens, horários de funcionamento e regras de acesso — diretamente com a fonte oficial
+        antes de viajar.
+      </p>
+
+      <h2>2. Propriedade intelectual</h2>
+      <p>
+        Os textos, imagens e demais materiais originais publicados neste site são de propriedade do{' '}
+        {SITE_TITLE} ou de seus licenciadores, salvo quando indicado o contrário. É permitida a
+        citação de trechos com a devida atribuição e link para a fonte; a reprodução integral de
+        artigos sem autorização não é permitida.
+      </p>
+
+      <h2>3. Links externos e afiliados</h2>
+      <p>
+        Este site contém links para sites de terceiros (como órgãos de turismo, empresas de
+        transporte e plataformas de reserva) e links de afiliados (por exemplo, da Booking.com).
+        Não temos controle sobre o conteúdo ou as práticas desses sites externos e não nos
+        responsabilizamos por eles. Links patrocinados/afiliados são sinalizados como tal.
+      </p>
+
+      <h2>4. Publicidade</h2>
+      <p>
+        Este site exibe anúncios de terceiros (Google AdSense) para se manter financeiramente
+        sustentável. A exibição de um anúncio não representa endosso do site aos produtos ou
+        serviços anunciados.
+      </p>
+
+      <h2>5. Limitação de responsabilidade</h2>
+      <p>
+        O {SITE_TITLE} não se responsabiliza por decisões de viagem tomadas com base no conteúdo do
+        site, nem por danos diretos ou indiretos decorrentes do uso das informações aqui publicadas.
+        O uso do site é por conta e risco do visitante.
+      </p>
+
+      <h2>6. Alterações nestes termos</h2>
+      <p>
+        Podemos atualizar estes Termos de Uso periodicamente. A data da última atualização está
+        indicada no topo desta página.
+      </p>
+
+      <h2>7. Legislação aplicável</h2>
+      <p>
+        [REVISAR] Estes termos são regidos pela legislação brasileira. Fica eleito o foro de
+        [REVISAR: sua cidade/comarca] para dirimir eventuais controvérsias.
+      </p>
+
+      <h2>8. Contato</h2>
+      <p>
+        Dúvidas sobre estes termos? Fale com a gente pela página de <a href="/contato/">Contato</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

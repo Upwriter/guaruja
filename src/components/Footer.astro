@@ -1,0 +1,55 @@
+---
+import { CATEGORIES, SITE_TITLE } from '../consts';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-sea-100 bg-sea-50">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div class="grid gap-8 sm:grid-cols-3">
+      <div>
+        <p class="text-lg font-extrabold text-sea-800">{SITE_TITLE}</p>
+        <p class="mt-2 text-sm text-sea-700">
+          Guia independente de turismo no Guarujá (SP): praias, passeios, onde ficar e comer, e
+          tudo para planejar sua viagem.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold text-sea-900">Categorias</p>
+        <ul class="mt-2 space-y-1 text-sm text-sea-700">
+          {
+            CATEGORIES.map((cat) => (
+              <li>
+                <a href={`/${cat.slug}/`} class="hover:text-sea-900 hover:underline">
+                  {cat.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold text-sea-900">Institucional</p>
+        <ul class="mt-2 space-y-1 text-sm text-sea-700">
+          <li><a href="/sobre/" class="hover:text-sea-900 hover:underline">Sobre</a></li>
+          <li><a href="/contato/" class="hover:text-sea-900 hover:underline">Contato</a></li>
+          <li>
+            <a href="/politica-de-privacidade/" class="hover:text-sea-900 hover:underline">
+              Política de Privacidade
+            </a>
+          </li>
+          <li>
+            <a href="/termos-de-uso/" class="hover:text-sea-900 hover:underline">Termos de Uso</a>
+          </li>
+          <li><a href="/rss.xml" class="hover:text-sea-900 hover:underline">RSS</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="mt-8 border-t border-sea-200 pt-6 text-xs text-sea-600">
+      &copy; {year} {SITE_TITLE}. Este site pode conter links de afiliados: ao comprar por eles,
+      podemos receber uma comissão, sem custo extra para você.
+    </p>
+  </div>
+</footer>

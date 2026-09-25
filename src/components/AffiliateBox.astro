@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  ctaLabel?: string;
+}
+
+const { title, description, href, ctaLabel = 'Ver disponibilidade' } = Astro.props;
+---
+
+<aside class="not-prose my-6 rounded-xl border border-sand-300 bg-sand-50 p-5">
+  <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-sand-700">Link patrocinado</p>
+  <p class="text-base font-bold text-sea-900">{title}</p>
+  <p class="mt-1 text-sm text-sea-800">{description}</p>
+  <a
+    href={href}
+    rel="sponsored nofollow noopener"
+    target="_blank"
+    class="mt-4 inline-flex items-center gap-1 rounded-md bg-sea-700 px-4 py-2 text-sm font-medium text-white hover:bg-sea-800"
+  >
+    {ctaLabel}
+    <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </a>
+  <p class="mt-2 text-xs text-sea-600">
+    Podemos receber uma comissão por reservas feitas através deste link, sem custo extra para
+    você.
+  </p>
+</aside>
