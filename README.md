@@ -200,9 +200,13 @@ Depois disso, todo `git push` para o branch `main` publica uma nova versão do s
 
 ## 7. O que ainda precisa da sua atenção
 
-- Os textos de **Sobre**, **Contato**, **Política de Privacidade** e **Termos de Uso** têm trechos
-  marcados com `[REVISAR]` — complete com os dados reais antes de publicar (e-mail de contato,
-  eventual CNPJ, foro/comarca, etc.).
+- Os textos de **Sobre nós**, **Contato**, **Política de Privacidade** e **Termos de Uso** têm
+  trechos marcados com `[REVISAR]` — complete com os dados reais antes de publicar (e-mail de
+  contato, eventual CNPJ, foro/comarca, minibiografias da equipe, etc.).
+- As fotos da equipe (Amanda Soares e Fran de Almeida) ainda não têm foto real — os arquivos
+  `src/content/authors/*.md` mostram um círculo com iniciais até você enviar as fotos. Quando
+  tiver os arquivos, adicione um campo `avatar: "./caminho-da-foto.jpg"` no frontmatter de cada
+  um (mesmo mecanismo do `heroImage` dos artigos).
 - Os 3 artigos de exemplo estão em modo rascunho (`draft: true`) e cheios de `[VERIFICAR]` — não
   publique sem conferir preços, horários, endereços e nomes de lugares em uma fonte oficial.
 - `public/og-default.svg` é uma imagem de compartilhamento provisória (SVG). O ideal é trocá-la por

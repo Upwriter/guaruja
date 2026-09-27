@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../consts';
+import { getAllAuthors, getAuthorUrl } from '../lib/authors';
+
+const title = 'Sobre nós';
+const description = `Conheça o ${SITE_TITLE} e a equipe por trás do guia de turismo do Guarujá, no litoral de São Paulo.`;
+
+const authors = await getAllAuthors();
+
+function getInitials(name: string): string {
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join('');
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-extrabold text-sea-900">Sobre nós</h1>
+
+    <div class="prose prose-article mt-6 max-w-none">
+      <p>
+        O {SITE_TITLE} é um guia independente de turismo dedicado ao Guarujá, no litoral de São
+        Paulo. Aqui você encontra guias de praias, sugestões de passeios, dicas de hospedagem e
+        gastronomia, e informações práticas para planejar sua viagem, seja um fim de semana ou
+        férias mais longas.
+      </p>
+      <h2>Como escolhemos o que recomendar</h2>
+      <p>
+        [REVISAR] Explique brevemente seus critérios: por exemplo, se vocês visitam os lugares
+        pessoalmente, se usam fontes oficiais (prefeitura, órgãos de turismo) ou se aceitam
+        sugestões de leitores.
+      </p>
+    </div>
+
+    <h2 class="mt-10 text-2xl font-bold text-sea-900">Nossa equipe</h2>
+    <div class="mt-4 grid gap-6 sm:grid-cols-2">
+      {
+        authors.map((author) => (
+          <a
+            href={getAuthorUrl(author.id)}
+            class="flex gap-4 rounded-xl border border-sea-100 p-5 shadow-sm transition hover:shadow-md"
+          >
+            <span
+              aria-hidden="true"
+              class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-sea-100 text-xl font-bold text-sea-700"
+            >
+              {getInitials(author.data.name)}
+            </span>
+            <div>
+              <p class="font-bold text-sea-900">{author.data.name}</p>
+              <p class="text-sm text-sea-600">{author.data.role}</p>
+              <p class="mt-2 text-sm text-sea-700">{author.data.bio}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="prose prose-article mt-10 max-w-none">
+      <h2>Publicidade e links de afiliados</h2>
+      <p>
+        Este site pode exibir anúncios (Google AdSense) e usar links de afiliados (por exemplo, da
+        Booking.com). Quando você clica em um link de afiliado e faz uma reserva, podemos receber
+        uma pequena comissão, sem custo extra para você. Isso nos ajuda a manter o site no ar.
+        Anúncios e links patrocinados são sempre identificados como tal.
+      </p>
+      <h2>Fale com a gente</h2>
+      <p>
+        Encontrou uma informação desatualizada ou quer sugerir um lugar? Visite nossa página de{' '}
+        <a href="/contato/">Contato</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
