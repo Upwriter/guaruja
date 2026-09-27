@@ -4,7 +4,7 @@ import { IMAGE_CREDITS } from '../data/image-credits';
 
 const title = 'Créditos das imagens';
 const description =
-  'Créditos, autoria e licença de cada foto de terceiros usada no site Destinos Guarujá, todas do Wikimedia Commons.';
+  'Créditos, autoria e licença das fotos (Wikimedia Commons) e dos dados dos mapas (OpenStreetMap) usados no site Destinos Guarujá.';
 ---
 
 <BaseLayout title={title} description={description}>
@@ -50,5 +50,19 @@ const description =
         ))
       }
     </ul>
+
+    <h2 class="mt-12 text-2xl font-bold text-sea-900">Mapas</h2>
+    <div class="prose prose-article mt-4 max-w-none">
+      <p>
+        Os mapas do Guarujá (cidade, bairros e praias, e o esquema de acessos) foram desenhados por
+        nós a partir de dados do OpenStreetMap, © colaboradores do OpenStreetMap, disponíveis sob a{' '}
+        <a href="https://opendatacommons.org/licenses/odbl/" rel="noopener">Open Database License (ODbL)</a>. Veja
+        mais em <a href="https://www.openstreetmap.org/copyright" rel="noopener">openstreetmap.org/copyright</a>.
+      </p>
+      <p>
+        As distâncias por estrada foram calculadas com o roteador OSRM, que também usa dados do
+        OpenStreetMap.
+      </p>
+    </div>
   </div>
 </BaseLayout>

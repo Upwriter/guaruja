@@ -197,6 +197,11 @@ Depois disso, todo `git push` para o branch `main` publica uma nova versão do s
 | `npm run dev` | Roda o site localmente, com atualização automática ao salvar |
 | `npm run build` | Gera a versão final do site (pasta `dist/`) e a busca (Pagefind) |
 | `npm run preview` | Roda a versão final gerada pelo `build`, para conferir antes de publicar |
+| `npm run mapas` | Redesenha os mapas da página inicial (use `npm run mapas -- --atualizar` para baixar dados novos do OpenStreetMap) |
+
+Os mapas da página inicial (`src/assets/mapas/`) são desenhados pelo script
+`scripts/gerar-mapas.mjs` a partir de dados do OpenStreetMap — não edite os arquivos `.svg` à
+mão, rode o script de novo. As distâncias da seção "Como chegar" ficam em `src/data/distancias.ts`.
 
 ## 7. O que ainda precisa da sua atenção
 

@@ -13,6 +13,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# cache dos dados do OpenStreetMap usados por scripts/gerar-mapas.mjs
+scripts/.osm-cache/
+
 # environment variables
 .env
 .env.production

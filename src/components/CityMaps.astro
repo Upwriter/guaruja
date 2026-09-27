@@ -1,0 +1,71 @@
+---
+// Mapas estáticos gerados por scripts/gerar-mapas.mjs a partir do OpenStreetMap.
+import { Image } from 'astro:assets';
+import MapCredit from './MapCredit.astro';
+import mapaCidade from '../assets/mapas/mapa-guaruja.svg';
+import mapaBairros from '../assets/mapas/mapa-bairros-praias.svg';
+import legenda from '../data/mapa-bairros-praias.json';
+---
+
+<section aria-labelledby="mapas-heading" class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+  <h2 id="mapas-heading" class="text-2xl font-bold text-sea-900">Mapa do Guarujá</h2>
+  <p class="mt-2 max-w-3xl text-sea-700">
+    O Guarujá fica na Ilha de Santo Amaro, separado do continente por canais. A cidade tem dois
+    distritos — Guarujá (sede) e Vicente de Carvalho — e dezenas de praias ao longo da costa.
+  </p>
+
+  <div class="mt-6 grid gap-8 lg:grid-cols-2">
+    <figure>
+      <Image
+        src={mapaCidade}
+        alt="Mapa do Guarujá mostrando o contorno da ilha, as principais avenidas, a Rodovia SP-055 no acesso pelo continente, a SP-061 até a balsa de Bertioga e as balsas para Santos e Bertioga"
+        class="w-full rounded-xl border border-sea-100"
+      />
+      <figcaption class="mt-2 text-sm font-medium text-sea-800">Cidade, vias principais e balsas</figcaption>
+      <MapCredit href={mapaCidade.src} />
+    </figure>
+
+    <figure>
+      <Image
+        src={mapaBairros}
+        alt="Mapa do Guarujá dividido nos distritos de Guarujá (sede) e Vicente de Carvalho, com os nomes dos bairros e as praias numeradas de oeste para leste"
+        class="w-full rounded-xl border border-sea-100"
+      />
+      <figcaption class="mt-2 text-sm font-medium text-sea-800">Distritos, bairros e praias</figcaption>
+      <MapCredit href={mapaBairros.src} />
+    </figure>
+  </div>
+
+  <div class="mt-8 grid gap-8 md:grid-cols-3">
+    <div class="md:col-span-2">
+      <h3 class="text-lg font-bold text-sea-900">Praias (números do mapa)</h3>
+      <ol class="mt-3 grid gap-x-6 gap-y-1 text-sm text-sea-800 sm:grid-cols-2">
+        {
+          legenda.praias.map((praia) => (
+            <li class="flex gap-2">
+              <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sand-400 text-[11px] font-bold text-sea-900">
+                {praia.n}
+              </span>
+              {praia.name}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <div>
+      <h3 class="text-lg font-bold text-sea-900">Bairros por distrito</h3>
+      {
+        Object.entries(legenda.bairros).map(([distrito, bairros]) => (
+          <div class="mt-3">
+            <p class="text-sm font-semibold text-sea-900">{distrito}</p>
+            <p class="mt-1 text-sm text-sea-700">{bairros.join(' · ')}</p>
+          </div>
+        ))
+      }
+      <p class="mt-3 text-xs text-sea-500">
+        Os nomes dos bairros vêm do OpenStreetMap e indicam a localização aproximada — não são os
+        limites oficiais de cada bairro.
+      </p>
+    </div>
+  </div>
+</section>

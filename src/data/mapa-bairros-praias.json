@@ -1,0 +1,138 @@
+{
+  "praias": [
+    {
+      "n": 1,
+      "name": "Praia do Sangava"
+    },
+    {
+      "n": 2,
+      "name": "Praia do Cheira Limão"
+    },
+    {
+      "n": 3,
+      "name": "Praia do Góes"
+    },
+    {
+      "n": 4,
+      "name": "Praia do Saco do Major"
+    },
+    {
+      "n": 5,
+      "name": "Praia de Santa Cruz dos Navegantes"
+    },
+    {
+      "n": 6,
+      "name": "Praia do Guaiúba"
+    },
+    {
+      "n": 7,
+      "name": "Praia do Forte"
+    },
+    {
+      "n": 8,
+      "name": "Praia do Bueno"
+    },
+    {
+      "n": 9,
+      "name": "Praia do Tombo"
+    },
+    {
+      "n": 10,
+      "name": "Praia das Astúrias"
+    },
+    {
+      "n": 11,
+      "name": "Praia das Pitangueiras"
+    },
+    {
+      "n": 12,
+      "name": "Praia da Enseada"
+    },
+    {
+      "n": 13,
+      "name": "Praia da Enseada – Canto das Tartarugas"
+    },
+    {
+      "n": 14,
+      "name": "Praia do Sorocotuba"
+    },
+    {
+      "n": 15,
+      "name": "Praia do Éden"
+    },
+    {
+      "n": 16,
+      "name": "Praia do Mar Casado"
+    },
+    {
+      "n": 17,
+      "name": "Praia de Pernambuco"
+    },
+    {
+      "n": 18,
+      "name": "Praia do Perequê"
+    },
+    {
+      "n": 19,
+      "name": "Praia de São Pedro"
+    },
+    {
+      "n": 20,
+      "name": "Praia das Conchas"
+    },
+    {
+      "n": 21,
+      "name": "Praia de Iporanga"
+    },
+    {
+      "n": 22,
+      "name": "Praia do Pinheiro"
+    },
+    {
+      "n": 23,
+      "name": "Praia do Camburí"
+    },
+    {
+      "n": 24,
+      "name": "Praia Preta"
+    },
+    {
+      "n": 25,
+      "name": "Praia Branca"
+    }
+  ],
+  "bairros": {
+    "Guarujá": [
+      "Cachoeira",
+      "Cidade Náutica",
+      "Enseada",
+      "Jardim Ponchal",
+      "Jardim Primavera",
+      "Jardim Umuarama - Perequê",
+      "Jardim Vitória",
+      "Pitangueiras",
+      "Santo Antônio",
+      "Vila Ligia",
+      "Vila Santa Rosa"
+    ],
+    "Vicente de Carvalho": [
+      "Itapema",
+      "Jardim Alvorada",
+      "Jardim Boa Esperança",
+      "Jardim Conceiçãozinha",
+      "Jardim Maravilha",
+      "Jardim Progresso",
+      "Morrinhos",
+      "Pae Cará",
+      "Parque Estuário",
+      "Sítio Conceiçãozinha",
+      "Vicente de Carvalho",
+      "Vila Alice",
+      "Vila Áurea",
+      "Vila Edna",
+      "Vila Itapema",
+      "Vila Selma",
+      "Vila Zilda"
+    ]
+  }
+}

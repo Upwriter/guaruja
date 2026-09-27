@@ -10,6 +10,7 @@
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
+    "mapas": "node scripts/gerar-mapas.mjs",
     "astro": "astro"
   },
   "dependencies": {

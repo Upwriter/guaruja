@@ -1,0 +1,21 @@
+---
+interface Props {
+  /** URL do arquivo do mapa, para abrir em tamanho grande (útil no celular). */
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<p class="mt-1.5 flex flex-wrap justify-between gap-x-4 gap-y-1 text-xs text-sea-500">
+  <span>
+    Mapa: dados ©{' '}
+    <a href="https://www.openstreetmap.org/copyright" class="underline underline-offset-2 hover:text-sea-700" rel="noopener">
+      colaboradores do OpenStreetMap
+    </a>{' '}
+    (ODbL)
+  </span>
+  <a href={href} class="font-medium underline underline-offset-2 hover:text-sea-700">
+    Abrir mapa em tamanho grande
+  </a>
+</p>
