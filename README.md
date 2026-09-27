@@ -1,4 +1,4 @@
-# Destino Guarujá
+# Destinos Guarujá
 
 Blog de turismo sobre o Guarujá (SP), feito com [Astro](https://astro.build), TypeScript e
 Tailwind CSS. O site é 100% estático (sem servidor rodando depois de pronto), pensado para SEO e

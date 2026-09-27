@@ -1,4 +1,4 @@
-export const SITE_TITLE = 'Destino Guarujá';
+export const SITE_TITLE = 'Destinos Guarujá';
 export const SITE_DESCRIPTION =
   'Guia de turismo do Guarujá (SP): praias, passeios, trilhas, onde ficar, onde comer e dicas práticas para planejar sua viagem.';
 export const SITE_URL = 'https://destinosguaruja.com.br';
