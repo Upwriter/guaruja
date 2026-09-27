@@ -1,0 +1,52 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { ARTICLES_PER_PAGE } from '../../consts';
+import { getPublishedArticles, type Article } from '../../lib/articles';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const articles = await getPublishedArticles();
+  return paginate(articles, { pageSize: ARTICLES_PER_PAGE });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: Page<Article> };
+
+const pageTitle = page.currentPage > 1 ? `Blog — página ${page.currentPage}` : 'Blog';
+const description =
+  page.currentPage > 1
+    ? `Mais artigos do Destinos Guarujá (página ${page.currentPage}).`
+    : 'Todos os artigos do Destinos Guarujá: praias, passeios, hospedagem, gastronomia e dicas práticas, dos mais recentes aos mais antigos.';
+
+const breadcrumbItems = [
+  { name: 'Início', url: '/' },
+  { name: 'Blog', url: '/blog/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={description} structuredData={breadcrumbJsonLd(breadcrumbItems)}>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <Breadcrumb items={breadcrumbItems} />
+    <h1 class="text-3xl font-extrabold text-sea-900 sm:text-4xl">Blog</h1>
+    <p class="mt-2 max-w-2xl text-sea-700">
+      Todos os artigos do Destinos Guarujá, dos mais recentes aos mais antigos.
+    </p>
+
+    {
+      page.data.length > 0 ? (
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {page.data.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+      ) : (
+        <p class="mt-8 text-sea-600">Ainda não há artigos publicados.</p>
+      )
+    }
+
+    <Pagination currentPage={page.currentPage} lastPage={page.lastPage} baseUrl="/blog/" />
+  </div>
+</BaseLayout>
