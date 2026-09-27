@@ -4,10 +4,17 @@ description: "Descubra os principais bairros para se hospedar no Guarujá, com o
 pubDate: 2026-09-25
 category: "onde-ficar"
 tags: ["hospedagem", "bairros"]
+author: "fran-de-almeida"
+heroImage: "../../../assets/guaruja/guaiuba-panoramio.jpg"
+heroAlt: "Vista aérea da praia e do bairro de Guaiúba, no Guarujá, com mar azul e vegetação ao redor"
+heroImageCredit: "guaiuba-panoramio.jpg"
 draft: true
 ---
 
+import { Image } from 'astro:assets';
 import AffiliateBox from '../../../components/AffiliateBox.astro';
+import ImageCredit from '../../../components/ImageCredit.astro';
+import asturiasPhoto from '../../../assets/guaruja/asturias-sobre-as-ondas.jpg';
 
 ## Introdução
 
@@ -36,6 +43,15 @@ Confirme perfil de hospedagem e estrutura antes de publicar.
 [VERIFICAR] Região com praias mais residenciais, geralmente associada a um público que busca mais
 sossego sem abrir mão de estrutura. Confirme opções de hospedagem e distância até pontos turísticos
 antes de publicar.
+
+<Image
+  src={asturiasPhoto}
+  alt="Vista do bairro de Astúrias, no Guarujá, com as ondas do mar em primeiro plano"
+  width={640}
+  height={457}
+  class="rounded-xl"
+/>
+<ImageCredit file="asturias-sobre-as-ondas.jpg" />
 
 ## Guaiúba
 

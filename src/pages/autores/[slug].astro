@@ -1,0 +1,97 @@
+---
+import { Image } from 'astro:assets';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getAllAuthors, getAuthorArticles, getAuthorUrl } from '../../lib/authors';
+import { breadcrumbJsonLd, personJsonLd } from '../../lib/seo';
+
+export const getStaticPaths = (async () => {
+  const authors = await getAllAuthors();
+  return authors.map((author) => ({
+    params: { slug: author.id },
+    props: { author },
+  }));
+}) satisfies GetStaticPaths;
+
+const { author } = Astro.props;
+const url = getAuthorUrl(author.id);
+const articles = await getAuthorArticles(author.id);
+
+const initials = author.data.name
+  .split(' ')
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((part) => part[0]?.toUpperCase())
+  .join('');
+
+const breadcrumbItems = [
+  { name: 'Início', url: '/' },
+  { name: author.data.name, url },
+];
+
+const structuredData = [
+  personJsonLd({
+    name: author.data.name,
+    url,
+    jobTitle: author.data.role,
+    image: author.data.avatar?.src,
+  }),
+  breadcrumbJsonLd(breadcrumbItems),
+];
+---
+
+<BaseLayout
+  title={author.data.name}
+  description={`Artigos escritos por ${author.data.name} (${author.data.role}) no Destinos Guarujá.`}
+  structuredData={structuredData}
+>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <div class="flex items-center gap-4">
+      {
+        author.data.avatar ? (
+          <Image
+            src={author.data.avatar}
+            alt={author.data.avatarAlt ?? ''}
+            width={80}
+            height={80}
+            class="h-20 w-20 rounded-full object-cover"
+          />
+        ) : (
+          <span
+            aria-hidden="true"
+            class="flex h-20 w-20 items-center justify-center rounded-full bg-sea-100 text-2xl font-bold text-sea-700"
+          >
+            {initials}
+          </span>
+        )
+      }
+      <div>
+        <h1 class="text-2xl font-extrabold text-sea-900 sm:text-3xl">{author.data.name}</h1>
+        <p class="text-sea-600">{author.data.role}</p>
+      </div>
+    </div>
+
+    <p class="prose prose-article mt-6 max-w-none">{author.data.bio}</p>
+  </div>
+
+  <section aria-labelledby="artigos-heading" class="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
+    <h2 id="artigos-heading" class="mb-4 text-xl font-bold text-sea-900">
+      Artigos de {author.data.name}
+    </h2>
+    {
+      articles.length > 0 ? (
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {articles.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-sea-600">Nenhum artigo publicado ainda.</p>
+      )
+    }
+  </section>
+</BaseLayout>

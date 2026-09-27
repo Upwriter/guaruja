@@ -4,6 +4,10 @@ description: "Um guia com as principais praias do Guarujá, para você escolher 
 pubDate: 2026-09-25
 category: "praias"
 tags: ["praias", "guia"]
+author: "amanda-soares"
+heroImage: "../../../assets/guaruja/praia-do-pereque.jpg"
+heroAlt: "Vista da Praia do Perequê no Guarujá, com faixa de areia e mar calmo"
+heroImageCredit: "praia-do-pereque.jpg"
 draft: true
 faq:
   - question: "Qual é a praia mais famosa do Guarujá?"

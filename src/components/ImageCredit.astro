@@ -1,0 +1,36 @@
+---
+// Legenda discreta de crédito, exibida sob fotos de terceiros.
+// Só renderiza algo se o arquivo tiver créditos cadastrados em src/data/image-credits.ts.
+import { getImageCredit } from '../data/image-credits';
+
+interface Props {
+  /** nome do arquivo dentro de src/assets/guaruja/, ex.: "praia-do-pereque.jpg" */
+  file: string;
+}
+
+const { file } = Astro.props;
+const credit = getImageCredit(file);
+---
+
+{
+  credit && (
+    <p class="mt-1.5 text-xs text-sea-500">
+      Foto:{' '}
+      {credit.authorUrl ? (
+        <a href={credit.authorUrl} class="underline underline-offset-2 hover:text-sea-700" rel="noopener">
+          {credit.author}
+        </a>
+      ) : (
+        credit.author
+      )}
+      {' / '}
+      <a href={credit.sourceUrl} class="underline underline-offset-2 hover:text-sea-700" rel="noopener">
+        Wikimedia Commons
+      </a>
+      {', '}
+      <a href={credit.licenseUrl} class="underline underline-offset-2 hover:text-sea-700" rel="noopener">
+        {credit.license}
+      </a>
+    </p>
+  )
+}

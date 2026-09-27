@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import type { AuthorEntry } from '../lib/authors';
+import { getAuthorUrl } from '../lib/authors';
+
+interface Props {
+  author: AuthorEntry;
+}
+
+const { author } = Astro.props;
+const url = getAuthorUrl(author.id);
+const initials = author.data.name
+  .split(' ')
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((part) => part[0]?.toUpperCase())
+  .join('');
+---
+
+<a href={url} class="not-prose mb-4 flex items-center gap-2 text-sm text-sea-700 hover:text-sea-900">
+  {
+    author.data.avatar ? (
+      <Image
+        src={author.data.avatar}
+        alt=""
+        width={32}
+        height={32}
+        class="h-8 w-8 rounded-full object-cover"
+      />
+    ) : (
+      <span
+        aria-hidden="true"
+        class="flex h-8 w-8 items-center justify-center rounded-full bg-sea-100 text-xs font-bold text-sea-700"
+      >
+        {initials}
+      </span>
+    )
+  }
+  <span>
+    Por <span class="font-medium underline underline-offset-2">{author.data.name}</span>
+  </span>
+</a>

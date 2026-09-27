@@ -29,6 +29,21 @@ export function organizationJsonLd() {
   };
 }
 
+export function personJsonLd(input: { name: string; url: string; jobTitle?: string; image?: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: input.name,
+    url: absoluteUrl(input.url),
+    jobTitle: input.jobTitle,
+    image: input.image ? absoluteUrl(input.image) : undefined,
+    worksFor: {
+      '@type': 'Organization',
+      name: SITE_TITLE,
+    },
+  };
+}
+
 export interface BreadcrumbItem {
   name: string;
   url: string;
@@ -54,6 +69,11 @@ export interface ArticleJsonLdInput {
   pubDate: Date;
   updatedDate?: Date;
   image?: string;
+  /** quando o artigo tem um autor de verdade (ver src/content/authors/) */
+  author?: {
+    name: string;
+    url: string;
+  };
 }
 
 export function articleJsonLd(input: ArticleJsonLdInput) {
@@ -69,10 +89,16 @@ export function articleJsonLd(input: ArticleJsonLdInput) {
       '@type': 'WebPage',
       '@id': absoluteUrl(input.url),
     },
-    author: {
-      '@type': 'Organization',
-      name: SITE_TITLE,
-    },
+    author: input.author
+      ? {
+          '@type': 'Person',
+          name: input.author.name,
+          url: absoluteUrl(input.author.url),
+        }
+      : {
+          '@type': 'Organization',
+          name: SITE_TITLE,
+        },
     publisher: {
       '@type': 'Organization',
       name: SITE_TITLE,

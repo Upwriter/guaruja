@@ -1,4 +1,4 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { CATEGORY_SLUGS } from './consts';
@@ -18,8 +18,12 @@ const blog = defineCollection({
       updatedDate: z.coerce.date().optional(),
       category: z.enum(CATEGORY_SLUGS),
       tags: z.array(z.string()).default([]),
+      /** referencia um arquivo em src/content/authors/, ex.: "amanda-soares" */
+      author: reference('authors').optional(),
       heroImage: image().optional(),
       heroAlt: z.string().optional(),
+      /** nome do arquivo em src/data/image-credits.ts, quando o heroImage vier de lá */
+      heroImageCredit: z.string().optional(),
       faq: z
         .array(
           z.object({
@@ -37,4 +41,16 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+const authors = defineCollection({
+  loader: glob({ base: './src/content/authors', pattern: '**/*.md' }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      role: z.string(),
+      bio: z.string(),
+      avatar: image().optional(),
+      avatarAlt: z.string().optional(),
+    }),
+});
+
+export const collections = { blog, authors };

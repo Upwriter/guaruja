@@ -8,7 +8,10 @@ import ShareButtons from '../components/ShareButtons.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import AdSlot from '../components/AdSlot.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import ImageCredit from '../components/ImageCredit.astro';
+import AuthorByline from '../components/AuthorByline.astro';
 import { getArticleUrl, estimateReadingTime, type Article } from '../lib/articles';
+import { resolveArticleAuthor, getAuthorUrl } from '../lib/authors';
 import { getCategory } from '../consts';
 import { absoluteUrl, articleJsonLd, breadcrumbJsonLd, faqJsonLd } from '../lib/seo';
 
@@ -19,10 +22,21 @@ interface Props {
 }
 
 const { entry, headings, related } = Astro.props;
-const { title, description, pubDate, updatedDate, heroImage, heroAlt, faq, category } = entry.data;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  heroAlt,
+  heroImageCredit,
+  faq,
+  category,
+} = entry.data;
 const categoryInfo = getCategory(category);
 const url = getArticleUrl(entry);
 const readingMinutes = estimateReadingTime(entry.body);
+const author = await resolveArticleAuthor(entry);
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
@@ -38,6 +52,7 @@ const structuredData = [
     pubDate,
     updatedDate,
     image: heroImage?.src,
+    author: author ? { name: author.data.name, url: getAuthorUrl(author.id) } : undefined,
   }),
   breadcrumbJsonLd(breadcrumbItems),
   ...(faq && faq.length > 0 ? [faqJsonLd(faq)] : []),
@@ -56,18 +71,24 @@ const structuredData = [
 
     {
       heroImage && (
-        <Image
-          src={heroImage}
-          alt={heroAlt ?? ''}
-          width={1024}
-          height={576}
-          class="mb-6 w-full rounded-xl object-cover"
-          priority
-        />
+        <div class="mb-6">
+          <Image
+            src={heroImage}
+            alt={heroAlt ?? ''}
+            width={1024}
+            height={576}
+            class="w-full rounded-xl object-cover"
+            priority
+          />
+          {heroImageCredit && <ImageCredit file={heroImageCredit} />}
+        </div>
       )
     }
 
     <h1 class="text-3xl font-extrabold text-sea-900 sm:text-4xl">{title}</h1>
+
+    {author && <AuthorByline author={author} />}
+
     <div class="mt-2 flex flex-wrap items-center gap-x-1 gap-y-1 text-sm text-sea-600">
       <span>Publicado em <FormattedDate date={pubDate} /></span>
       {

@@ -4,8 +4,13 @@ description: "Guia da travessia de balsa entre Santos e Guarujá: como funciona 
 pubDate: 2026-09-25
 category: "como-chegar"
 tags: ["balsa", "como-chegar"]
+author: "amanda-soares"
 draft: true
 ---
+
+import { Image } from 'astro:assets';
+import ImageCredit from '../../../components/ImageCredit.astro';
+import mapaGuaruja from '../../../assets/guaruja/mapa-guaruja-sp.svg';
 
 ## Introdução
 
@@ -15,6 +20,15 @@ Este guia explica como funciona a travessia e o que você precisa verificar ante
 
 [VERIFICAR] Todo o conteúdo abaixo precisa ser conferido em uma fonte oficial (site da DERSA ou
 órgão responsável) antes da publicação, especialmente horários, preços e regras de prioridade.
+
+<Image
+  src={mapaGuaruja}
+  alt="Mapa de localização do município do Guarujá no estado de São Paulo"
+  width={640}
+  height={432}
+  class="mx-auto"
+/>
+<ImageCredit file="mapa-guaruja-sp.svg" />
 
 ## Como funciona a travessia
 

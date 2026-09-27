@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { IMAGE_CREDITS } from '../data/image-credits';
+
+const title = 'Créditos das imagens';
+const description =
+  'Créditos, autoria e licença de cada foto de terceiros usada no site Destinos Guarujá, todas do Wikimedia Commons.';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-extrabold text-sea-900">Créditos das imagens</h1>
+
+    <div class="prose prose-article mt-6 max-w-none">
+      <p>
+        Usamos apenas fotos do <a href="https://commons.wikimedia.org/">Wikimedia Commons</a> com
+        licenças que permitem uso comercial (domínio público, CC0, CC BY ou CC BY-SA), sempre com
+        os créditos abaixo. Nenhuma imagem é copiada de outro site sem essa verificação.
+      </p>
+    </div>
+
+    <ul class="mt-8 space-y-6">
+      {
+        IMAGE_CREDITS.map((credit) => (
+          <li class="rounded-lg border border-sea-100 p-4">
+            <p class="font-semibold text-sea-900">{credit.commonsTitle}</p>
+            <p class="mt-1 text-sm text-sea-700">
+              Autor:{' '}
+              {credit.authorUrl ? (
+                <a href={credit.authorUrl} class="underline underline-offset-2 hover:text-sea-900" rel="noopener">
+                  {credit.author}
+                </a>
+              ) : (
+                credit.author
+              )}
+            </p>
+            <p class="mt-1 text-sm text-sea-700">
+              Licença:{' '}
+              <a href={credit.licenseUrl} class="underline underline-offset-2 hover:text-sea-900" rel="noopener">
+                {credit.license}
+              </a>
+            </p>
+            <p class="mt-1 text-sm text-sea-700">
+              Fonte:{' '}
+              <a href={credit.sourceUrl} class="underline underline-offset-2 hover:text-sea-900" rel="noopener">
+                Página do arquivo no Wikimedia Commons
+              </a>
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>
