@@ -6,7 +6,7 @@ import ImageCredit from '../components/ImageCredit.astro';
 import { CATEGORIES, SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getPublishedArticles } from '../lib/articles';
 import { organizationJsonLd, websiteJsonLd } from '../lib/seo';
-import heroPhoto from '../assets/guaruja/guaruja-marco-2018.jpg';
+import heroPhoto from '../assets/guaruja/guaiuba-panoramio.jpg';
 
 const articles = await getPublishedArticles();
 const latest = articles.slice(0, 6);
@@ -30,13 +30,13 @@ const latest = articles.slice(0, 6);
     <div class="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
       <Image
         src={heroPhoto}
-        alt="Vista panorâmica da orla do Guarujá, com prédios à beira-mar e o mar ao fundo"
+        alt="Vista aérea da praia e do bairro de Guaiúba, no Guarujá, com mar azul e vegetação ao redor"
         width={1600}
         height={600}
         class="w-full rounded-2xl object-cover"
         priority
       />
-      <ImageCredit file="guaruja-marco-2018.jpg" />
+      <ImageCredit file="guaiuba-panoramio.jpg" />
     </div>
   </section>
 
