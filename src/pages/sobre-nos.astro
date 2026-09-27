@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_TITLE } from '../consts';
 import { getAllAuthors, getAuthorUrl } from '../lib/authors';
@@ -45,12 +46,24 @@ function getInitials(name: string): string {
             href={getAuthorUrl(author.id)}
             class="flex gap-4 rounded-xl border border-sea-100 p-5 shadow-sm transition hover:shadow-md"
           >
-            <span
-              aria-hidden="true"
-              class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-sea-100 text-xl font-bold text-sea-700"
-            >
-              {getInitials(author.data.name)}
-            </span>
+            {
+              author.data.avatar ? (
+                <Image
+                  src={author.data.avatar}
+                  alt={author.data.avatarAlt ?? ''}
+                  width={64}
+                  height={64}
+                  class="h-16 w-16 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <span
+                  aria-hidden="true"
+                  class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-sea-100 text-xl font-bold text-sea-700"
+                >
+                  {getInitials(author.data.name)}
+                </span>
+              )
+            }
             <div>
               <p class="font-bold text-sea-900">{author.data.name}</p>
               <p class="text-sm text-sea-600">{author.data.role}</p>
