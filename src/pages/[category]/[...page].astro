@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import Pagination from '../../components/Pagination.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import HowToGetThere from '../../components/HowToGetThere.astro';
 import { ARTICLES_PER_PAGE, CATEGORIES, getCategory } from '../../consts';
 import { getPublishedArticles, type Article } from '../../lib/articles';
 import { breadcrumbJsonLd } from '../../lib/seo';
@@ -35,14 +36,27 @@ const breadcrumbItems = [
   { name: 'Início', url: '/' },
   { name: categoryInfo.label, url: baseUrl },
 ];
+
+const showHowToGetThere = categoryInfo.slug === 'como-chegar' && page.currentPage === 1;
 ---
 
 <BaseLayout title={pageTitle} description={description} structuredData={breadcrumbJsonLd(breadcrumbItems)}>
-  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+  <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
     <Breadcrumb items={breadcrumbItems} />
     <h1 class="text-3xl font-extrabold text-sea-900 sm:text-4xl">{categoryInfo.label}</h1>
     <p class="mt-2 max-w-2xl text-sea-700">{categoryInfo.description}</p>
+  </div>
 
+  {
+    showHowToGetThere && (
+      <div class="mt-8">
+        <HowToGetThere />
+      </div>
+    )
+  }
+
+  <div class="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
+    {showHowToGetThere && <h2 class="mt-10 text-2xl font-bold text-sea-900">Artigos sobre como chegar</h2>}
     {
       page.data.length > 0 ? (
         <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
